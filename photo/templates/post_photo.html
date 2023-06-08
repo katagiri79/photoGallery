@@ -35,9 +35,17 @@
                             <th>画像2</th>
                             <td>{{ form.image2 }}</td>
                         </tr>
+                        <tr>
+                            <th>公開する</th>
+                            <td>{{ form.public }}</td>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <td><p><small style="color: grey">非公開から再び公開する場合はマイページから編集してください。</small></p></td>
+                        </tr>
                     </table>
                     <hr>
-                    <button type="submit">投稿する</button>
+                    <button class="btn btn3 my-2" type="submit">投稿する</button>
                 </form>
             </div>
         </div>

@@ -10,8 +10,11 @@
     <title>Log in</title>
 
     <!-- staticでfavicon.icoのURLを生成する -->
-    <link rel="icon" type="image/x-icon" href={% static "assets/favicon.ico" %} />
-    <!-- <link rel="icon" type="image/x-icon" href="static assets/favicon.ico" /> -->
+    <link rel="icon" type="image/x-icon" href={% static "img/shinamon.png" %} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap" rel="stylesheet">
 
     <!-- Bootstrap core CSSを読み込むコードをBootstrapからコピーして<link>タグを書き換え -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -30,13 +33,39 @@
           font-size: 3.5rem;
         }
       }
+      
+      .btn2 {
+        letter-spacing: 0.1em;
+        color: #476066;
+        border: none;
+        border-radius: 10px;
+        outline: none;
+        background-color: #a1d8e6;
+        background-size: 400% 400%;
+        box-shadow: 7px 7px 0 #6b9099;
+        cursor: pointer;
+        transition: all 0.1s ease;
+
+        &:hover {
+          color:#476066;
+          /* animation: gradient 5s ease infinite;
+          font-size: 2.4vw; */
+          box-shadow: 12px 12px 0 #476066;
+        }
+      }
+
+      body{
+        /* フォントの設定 */
+        font-family: 'Mochiy Pop One', sans-serif;
+        color: #476066;
+        /* ベース背景色の設定 */
+        background-color: #E3F4F5;
+      }
     </style>
 
-    
     <!-- Custom styles for this template -->
     <!-- 「static/css/signin.css」の読み込み -->
     <link href={% static "css/signin.css" %} rel="stylesheet">
-    <!-- <link href="static css/signin.css" rel="stylesheet"> -->
   </head>
   <body class="text-center">
     
@@ -50,8 +79,7 @@
         {% csrf_token %}
         <!-- Bootstrapのロゴ表示 -->
         <!-- 「static/img/bootstrap-logo.svg」の読み込み -->
-        <img class="mb-4" src="{% static "img/bootstrap-logo.svg" %}" alt="" width="72" height="57">
-        <!-- <img class="mb-4" src="../../static/img/bootstrap-logo.svg" alt="" width="72" height="57"> -->
+        <img class="mb-4" src="{% static "img/shinamon.png" %}" alt="" width="200" height="180">
         <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
         <!-- Usernameのラベル(非表示) -->
@@ -69,9 +97,9 @@
         <!-- name属性はLoginViewで定義されているフィールド名password -->
         <input type="password" name="password" id="id_password" autocomplete="current-password" class="form-control" placeholder="パスワード" required autofocus>
 
-        <input class="w-100 btn btn-lg btn-primary" type="submit" value="ログイン">
+        <input class="w-100 btn btn2" type="submit" value="ログイン">
         <br><br>
-        <p><a href="{% url 'password_reset' %}">パスワードを忘れましたか?</a></p>
+        <p><a href="{% url 'password_reset' %}" style="color: #476066; text-decoration: none;">パスワードを忘れましたか?</a></p>
         <!-- ログイン直後のリダイレクト先(トップページ)のURLパターン設定 -->
         <input type="hidden" name="next" value="{% url 'photo:index' %}">
       </form>

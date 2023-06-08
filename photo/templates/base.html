@@ -10,6 +10,13 @@
     <meta name="generator" content="Hugo 0.84.0">
     <!-- ヘッダー情報のタイトルを個別に設定できるようにする -->
     <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href={% static "img/shinamon.png" %} />
+
+
+    <!-- フォントの設定 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap" rel="stylesheet">
 
     <!-- Bootstrap core CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -28,12 +35,54 @@
           font-size: 3.5rem;
         }
       }
+
+      body{
+        /* フォントの設定 */
+        font-family: 'Mochiy Pop One', sans-serif;
+        color: #476066;
+        /* ベース背景色の設定 */
+        background-color: #E3F4F5;
+      }
+
+      /* ボタン設定 */
+      .btn2 {
+        letter-spacing: 0.1em;
+        color: #476066;
+        border: none;
+        border-radius: 10px;
+        outline: none;
+        background-color: #a1d8e6;
+        background-size: 400% 400%;
+        box-shadow: 7px 7px 0 #6b9099;
+        cursor: pointer;
+        transition: all 0.1s ease;
+
+        &:hover {
+          color:#476066;
+          /* animation: gradient 5s ease infinite;
+          font-size: 2.4vw; */
+          box-shadow: 12px 12px 0 #476066;
+        }
+      }
+
+      .btn3{
+        border: 1.8px dashed #646464;
+        color: #476066;
+        &:hover {
+          background-color: #bae0ea;
+        }
+      }
+
+      /* 下線設定 */
+      .under {
+        background: linear-gradient(transparent 50%, #83ccd2 50%);
+      }
     </style>
   </head>
 
   <body>
     <!-- ページのヘッダー -->    
-    <header>
+    <header class="sticky-top">
       <!-- ナビゲーションバーのヘッダー -->
       <div class="collapse bg-dark" id="navbarHeader">
         <div class="container">
@@ -42,14 +91,12 @@
               <!-- ヘッダーのタイトルと本文 -->
               <h4 class="text-white">お気に入りを見つけよう！</h4>
               <p class="text-muted">
-                誰でも参加できる写真投稿サイトです。
-                自分で撮影した写真ならなんでもオッケー！
-                でも、カテゴリに属する写真に限ります。
-                コメントも付けてください！
+                誰でも参加できる写真投稿サイトです。自分で撮影した写真ならなんでもオッケー！<br>
+                でも、カテゴリに属する写真に限ります。コメントも付けてください！
               </p>
             </div>
             <div class="col-sm-4 offset-md-1 py-4">
-              <h4 class="text-white">Contact</h4>
+              <h4 class="text-white">MENU</h4>
               <ul class="list-unstyled">
                 <!-- ナビゲーションメニュー -->
                 {% if user.is_authenticated %}
@@ -57,12 +104,12 @@
                 <li><a href="{% url 'photo:mypage' %}" class="text-white">マイページ</a></li>
                 <li><a href="{% url 'accounts:logout' %}" class="text-white">ログアウト</a></li>
                 <li><a href="{% url 'password_reset' %}" class="text-white">パスワードのリセット</a></li>
-                <li><a href="mailto:admin@example.com" class="text-white">Email me</a></li>
+                <li><a href="mailto:admin@example.com" class="text-white">お問い合わせ</a></li>
                 {% else %}
                 <!-- ログイン状態ではない場合のメニュー -->
                 <li><a href="{% url 'accounts:signup' %}" class="text-white">サインアップ</a></li>
                 <li><a href="{% url 'accounts:login' %}" class="text-white">ログイン</a></li>
-                <li><a href="mailto:admin@example.com" class="text-white">Email me</a></li>
+                <li><a href="mailto:admin@example.com" class="text-white">お問い合わせ</a></li>
                 {% endif %}
               </ul>
             </div>
@@ -74,7 +121,7 @@
         <div class="container">
           <!-- トップページへのリンク -->
           <a href="{% url 'photo:index' %}" class="navbar-brand d-flex align-items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24"><img src="{% static "img/shinamon.png" %}" alt="" width="40" height="36"></svg>
             <!-- リンクテキスト -->
             <strong>Photo Gallery</strong>
           </a>
@@ -92,13 +139,13 @@
     </main>
 
     <!-- フッター -->
-    <footer class="text-muted py-5">
+    <footer class="text-muted py-5" style="background-color: #83ccd2;">
       <div class="container">
         <p class="float-end mb-1">
-          <a href="#">Back to top</a>
+          <a href="https://www.sanrio.co.jp/characters/cinnamon/" style="color: #f0fff0; text-decoration: none;">Back to top</a>
         </p>
         <!-- フッターのテキストを任意のものに書き換え -->
-        <p class="mb-1">
+        <p class="mb-1" style="color: #f0fff0;">
           Photo Gallery is &copy; Bootstrap, but please post a lot!
         </p>
       </div>

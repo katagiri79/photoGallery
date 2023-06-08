@@ -1,4 +1,4 @@
-<div class="album py-5 bg-light">
+<div class="album py-5" style="background-color: #E3F4F5;">
   <div class="container">
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -9,31 +9,41 @@
       {% for record in object_list %}
 
       <div class="col">
-        <div class="card shadow-sm">
+        {% if record.public %}
+        <!-- 公開ならカードの色をlightblue -->
+        <div class="card shadow-sm" style="background-color: #a1d8e6">
+        {% else %}
+        <!-- 非公開ならカードの色をlightgray -->
+        <div class="card shadow-sm" style="background-color: lightgray;">
+        {% endif %}
           <!--
             svgタグをimgに変更
             src属性を追加して1枚目のイメージのURLを設定
           -->
-          <img src="{{ record.image1.url }}" class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+          <!-- 画像をクリックすると詳細ページに遷移 -->
+          <img src="{{ record.image1.url }}" class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false" onclick=location.href="{% url 'photo:photo_detail' record.pk %}" style="cursor: pointer;">
             <title>Placeholder</title>
             <rect width="100%" height="100%" fill="#55595c"/>
           </img>
 
-          <div class="card-body">
-            <p class="card-text">
+          <div class="card-body" style="height: 7rem;">
+            <!-- カードの幅を超えたタイトルは省略表示する -->
+            <p class="card-text" onclick=location.href="{% url 'photo:photo_detail' record.pk %}" style="display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden;">
+              <!-- 非公開の投稿には「非公開」と表示する -->
+              {% if not record.public %}
+              <small class="text-end" style="color: rgb(90, 90, 90)">＜非公開＞</small>
+              {% endif %}
               {{record.title}}
             </p>
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
-                <button type="button" 
-                class="btn btn-sm btn-outline-secondary" onclick=location.href="{% url 'photo:photo_detail' record.pk %}" >View</button>
-                <button type="button" 
-                class="btn btn-sm btn-outline-secondary" onclick=location.href="{% url 'photo:photos_cat' category=record.category.id %}">{{record.category.title}}</button>
+                <button type="button" class="btn btn-sm btn3" onclick=location.href="{% url 'photo:photos_cat' category=record.category.id %}">{{record.category.title}}</button>
+                <button type="button" class="btn btn-sm btn3" onclick=location.href="{% url 'photo:nice_success' pk=record.pk%}" >💗{{record.nice}}</button>
               </div>
+
               <!-- 投稿したユーザ名を出力 -->
-              <a href="{% url 'photo:user_list' user=record.user.id %}">
-                <small class="text-muted">
-                  {{record.user.username}}</small>
+              <a href="{% url 'photo:user_list' user=record.user.id %}" style="text-decoration: none;">
+                <small class="text-muted">{{record.user.username}}</small>
               </a>
             </div>
           </div>

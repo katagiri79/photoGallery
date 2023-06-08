@@ -5,6 +5,12 @@
 
     {% block contents %}
 
+    <style>
+        body{
+            background-color: #83ccd2;
+        }
+    </style>
+
     <!-- タイトルテンプレートは組み込まない -->
     
     <!-- ユーザーの投稿件数を表示 -->
@@ -15,11 +21,11 @@
             {% if object_list.count == 0 %}
                 <p>{{user.username}}さんの投稿はありません。</p>
             {% else %}
-                <p>投稿<strong>{{object_list.count}}</strong>件</p>
+                <p>投稿:<strong>{{object_list.count|add:"1"}}</strong>件</p>
             {% endif %}
-            <a href="{% url 'photo:post' %}">投稿する</a>
+            <a href="{% url 'photo:post' %}" class="btn btn2 my-2">投稿する</a>
         </div>
-        <hr>
+        <br>
     {% endif %}
     
     <!-- 投稿一覧のテンプレ―トの組み込み -->

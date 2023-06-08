@@ -19,7 +19,7 @@ class Category(models.Model):
         Return(str):カテゴリ名
         '''
         return self.title
-    
+
 class PhotoPost(models.Model):
     '''
     投稿されたデータを管理するモデル
@@ -83,6 +83,20 @@ class PhotoPost(models.Model):
         verbose_name='投稿日時',
         # 日時を自動追加
         auto_now_add=True
+    )
+
+    # 公開設定のフィールド
+    public = models.BooleanField(
+        # フィールドのタイトル
+        verbose_name='公開設定',
+        # 初期値を公開に設定
+        default=True
+    )
+
+    # いいね数のフィールド
+    nice = models.IntegerField(
+        # 初期値を0に設定
+        default=0
     )
 
     def __str__(self):

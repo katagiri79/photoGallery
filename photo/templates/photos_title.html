@@ -1,22 +1,31 @@
+<style>
+  body{
+    /* タイトル背景色設定 */
+    background: #83ccd2;
+  }
+</style>
+
 <section class="py-5 text-center container">
   <div class="row py-lg-5">
     <div class="col-lg-6 col-md-8 mx-auto">
       <!-- タイトルと本文 -->
-      <h1 class="fw-light">Photo Gallery</h1>
-      <p class="lead text-muted">
-        コメントを見て写真に描かれた世界に思いを馳せましょう。
+      <h1 class="fw-light" style="color: #f0fff0; text-shadow: 1px 1px 0px #000, -1px -1px 0px #000, -1px 1px 0px #000,  1px -1px 0px #000, 1px 0px 0px #000, -1px  0px 0px #000, 0px 1px 0px #000,  0px -1px 0px #000; margin: 0;">Photo Gallery</h1>
+      <br>
+      <p style = " border-bottom : solid 2px #f0f8ff"></p>
+      <p style="color: #f0fff0; font-size: 23px;">
+        コメントを見て写真に描かれた世界に思いを馳せましょう。<br>
         素敵な写真とコメントをお待ちしています！
       </p>
       <p>
         <!-- ナビゲーションボタン -->
         {% if user.is_authenticated %}
           <!-- ログイン中のボタン -->
-          <a href="{% url 'photo:post' %}" class="btn btn-primary my-2">投稿する</a>
-          <a href="{% url 'accounts:logout' %}" class="btn btn-secondary my-2">ログアウト</a>
+          <a href="{% url 'photo:post' %}" class="btn btn2 my-2">投稿する</a>　
+          <a href="{% url 'accounts:logout' %}" class="btn btn2 my-2">ログアウト</a>
         {% else %}
           <!-- ログイン状態ではない場合のボタン -->
-          <a href="{% url 'accounts:signup' %}" class="btn btn-primary my-2">今すぐサインアップ</a>
-          <a href="{% url 'accounts:login' %}" class="btn btn-secondary my-2">登録済みの方はログイン</a>
+          <a href="{% url 'accounts:signup' %}" class="btn btn2 my-2">今すぐサインアップ</a>　
+          <a href="{% url 'accounts:login' %}" class="btn btn2 my-2">登録済みの方はログイン</a>
         {% endif %}
       </p>
     </div>

@@ -9,31 +9,49 @@
     <div class="container">
         <!-- 行を配置 -->
         <div class="row">
-            <!-- 列の左右にoffset-3を入れる-->
-            <div class="col offset-3">
+            {% if object.image2 %}
+            <!-- 投稿された写真が2枚の場合 -->
+            <!-- 列の左右にoffset-2を入れる-->
+            <div class="col offset-2">
                 <!-- タイトル -->
                 <h2>{{object.title}}</h2>
                 <!-- コメント -->
-                <p>{{object.comment}}</p>
+                <p>{{object.comment|linebreaksbr}}</p>
                 <br>
                 <!-- 投稿日時 -->
                 <p>{{object.posted_at}}に投稿</p>
-                <!-- １枚目の写真 -->
-                <p><img src="{{ object.image1.url }}"></img></p>
-                <!-- ２枚目の写真が投稿されていたら表示する -->
-                {% if object.image2 %}
-                    <p><img src="{{ object.image2.url }}"></img></p>
-                    {% endif %}
+                <p>
+                    <!-- 写真1枚目 -->
+                    <img src="{{ object.image1.url }}" width="40%"></img>
+                    <!-- 写真2枚目 -->
+                    <img src="{{ object.image2.url }}" width="40%"></img>
+                </p>
+            {% else %}
+            <!-- 投稿された写真が1枚の場合 -->
+            <!-- 列の左右にoffset-3を入れる-->
+            <div class="col offset-3">
+                <!-- タイトル -->
+                <h2><span class="under">{{object.title}}</span></h2>
+                <!-- コメント -->
+                <p>{{object.comment|linebreaksbr}}</p>
+                <br>
+                <!-- 投稿日時 -->
+                <p>{{object.posted_at}}に投稿</p>
+                <!-- 写真 -->
+                <p><img src="{{ object.image1.url }}" width="45%"></img></p>
+            {% endif %}
 
-                    <!-- 投稿写真がログイン中のユーザーのものであれば削除ボタンを表示 -->
+                <!-- いいねボタンの追加 -->
+                <form  method="POST">
+                    <a href="{% url 'photo:nice_success' pk=object.pk %}" class="btn my-2">💗{{object.nice}}</a>
+                    <!-- 投稿写真がログイン中のユーザーのものであれば編集ボタンと削除ボタンを表示 -->
                     {% if request.user == object.user %}
-                    <form  method="POST">
+                    <a href="{% url 'photo:photo_edit' object.pk %}" class="btn btn3 my-2">編集する</a>
                     <!-- リンク先のURL
-                            photo/<Photo postsテーブルのid値>/delete/-->
-                    <a href="{% url 'photo:photo_delete' object.pk %}"
-                        class="btn btn-primary my-2">削除する</a>
-                    {% endif %}
-
+                        photo/<Photo postsテーブルのid値>/delete/-->
+                    <a href="{% url 'photo:photo_delete' object.pk %}" class="btn btn3 my-2">削除する</a>
+                </form>
+                {% endif %}
             </div>
         </div>
     </div>

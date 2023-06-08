@@ -15,26 +15,23 @@ urlpatterns = [
     # 投稿完了ページのアクセスはviewsモジュールのPostSuccessViewを実行
     path('post_done/', views.PostSuccessView.as_view(), name='post_done'),
 
+    # 編集ページのアクセスはviewsモジュールのPhotoEditViewを実行
+    path('photo-edit/<int:pk>', views.PhotoEditView.as_view(), name = 'photo_edit'),
+
     # カテゴリ一覧ページ
     # photo/<Categorys テーブルのid値>にマッチング
     # <int:category>は辞書{category: id値(int)}としてCategoryViewに渡される
-    path('photos/<int:category>',
-         views.CategoryView.as_view(),
-         name = 'photos_cat'),
+    path('photos/<int:category>', views.CategoryView.as_view(), name = 'photos_cat'),
     
     # ユーザー投稿一覧ページ
     # photos/<ユーザーテーブルのid値>にマッチング
     # <int:user>は辞書{user: id値(int)}としてCategoryViewに渡される
-    path('user-list/<int:user>',
-         views.UserView.as_view(),
-         name = 'user_list'),
+    path('user-list/<int:user>', views.UserView.as_view(), name = 'user_list'),
 
     # 詳細ページ
     # photo-detail/<Photo post テーブルのid値>にマッチング
     # <int:pk>は辞書{pk: id値(int)}としてDetailViewに渡される
-    path('photo_detail/<int:pk>',
-         views.DetailView.as_view(),
-         name = 'photo_detail'),
+    path('photo_detail/<int:pk>', views.DetailView.as_view(), name = 'photo_detail'),
      
     # マイページ
     # mypage/へのアクセスはMypageViewを実行
@@ -44,4 +41,9 @@ urlpatterns = [
     # photo/<Photo postsテーブルのid値>/delete/にマッチング
     # <int:pk>は辞書{pk: id値(int)}としてDetailViewに渡される
     path('photo/<int:pk>/delete/', views.PhotoDeleteView.as_view(), name = 'photo_delete'),
+
+    # いいね完了ページ
+    # photo/<Photo postsテーブルのid値>/nice/にマッチング
+    # <int:pk>は辞書{pk: id値(int)}としてcountに渡される
+    path('photo/<int:pk>/nice/', views.count, name='nice_success')
 ]
