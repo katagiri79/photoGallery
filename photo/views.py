@@ -128,7 +128,7 @@ class CategoryView(ListView):
         # categoryキーの値(Categorysテーブルのid)を取得
         category_id = self.kwargs['category']
         # filter(フィールド名=id, 公開設定=True)で絞り込む
-        categories = PhotoPost.objects.filter(category=category_id).order_by('-posted_at')
+        categories = PhotoPost.objects.filter(category=category_id, public=True).order_by('-posted_at')
 
         #クエリによって取得されたレコードを返す
         return categories
