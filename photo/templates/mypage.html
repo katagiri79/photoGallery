@@ -21,7 +21,7 @@
             {% if object_list.count == 0 %}
                 <p>{{user.username}}さんの投稿はありません。</p>
             {% else %}
-                <p>投稿:<strong>{{object_list.count|add:"1"}}</strong>件</p>
+                <p>投稿:<strong>{{object_list.count}}</strong>件</p>
             {% endif %}
             <a href="{% url 'photo:post' %}" class="btn btn2 my-2">投稿する</a>
         </div>
